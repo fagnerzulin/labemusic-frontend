@@ -1,9 +1,9 @@
 const palette = {
-  red: '#BF2C38',
-  purple: '#401731',
-  green: '#03A65A',
-  orange: '#F28A2E',
-  darkOrange: '#D96A29',
+  red: '#8C3A3A',
+  beige: '#F2EBDC',
+  darkYellow: '#A69B7B',
+  blue: '#6A84A6',
+  black: '#261D25',
 };
 
 export default palette;

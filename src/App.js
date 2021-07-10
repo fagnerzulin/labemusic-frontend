@@ -7,7 +7,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: palette.purple,
+        bg: palette.beige,
         fontFamily: 'Roboto',
       },
     },
