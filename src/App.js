@@ -1,5 +1,6 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import React from 'react';
+import Router from './routers/Router';
 import palette from './constants/paletteColor';
 
 const theme = extendTheme({
@@ -16,7 +17,7 @@ const theme = extendTheme({
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <div>oi</div>
+      <Router />
     </ChakraProvider>
   );
 }
