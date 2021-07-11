@@ -17,6 +17,8 @@ import React from 'react';
 import palette from '../../constants/paletteColor';
 import { ContainerFormSingUp, SubTitle } from './signUpModal.styled';
 import useForm from '../../hooks/useForm';
+import signUp from '../../services/signUp';
+import { saveToken } from '../../utils/localStorageFunctions';
 
 const initialValues = {
   email: '',
@@ -28,6 +30,16 @@ const initialValues = {
 export default function SignUpModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [form, onChange] = useForm(initialValues);
+
+  const onClickSignUp = async () => {
+    window.event.preventDefault();
+    const body = { ...form };
+
+    const result = await signUp(body);
+    if (result.status) {
+      saveToken(result.token);
+    }
+  };
 
   return (
     <>
@@ -53,7 +65,7 @@ export default function SignUpModal() {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ContainerFormSingUp onSubmit={() => {}}>
+            <ContainerFormSingUp onSubmit={onClickSignUp}>
               <FormControl id="name" isRequired>
                 <FormLabel>Nome de usuário</FormLabel>
                 <Input
