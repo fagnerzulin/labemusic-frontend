@@ -16,9 +16,31 @@ import {
 import React from 'react';
 import palette from '../../constants/paletteColor';
 import { ContainerFormSingUp, SubTitle } from './signUpModal.styled';
+import useForm from '../../hooks/useForm';
+import signUp from '../../services/signUp';
+import { saveToken } from '../../utils/localStorageFunctions';
+
+const initialValues = {
+  email: '',
+  password: '',
+  nickname: '',
+  name: '',
+};
 
 export default function SignUpModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [form, onChange] = useForm(initialValues);
+
+  const onClickSignUp = async () => {
+    window.event.preventDefault();
+    const body = { ...form };
+
+    const result = await signUp(body);
+    if (result.status) {
+      saveToken(result.token);
+    }
+  };
+
   return (
     <>
       <Button
@@ -43,12 +65,12 @@ export default function SignUpModal() {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ContainerFormSingUp onSubmit={() => {}}>
+            <ContainerFormSingUp onSubmit={onClickSignUp}>
               <FormControl id="name" isRequired>
                 <FormLabel>Nome de usuário</FormLabel>
                 <Input
-                  value=""
-                  onChange={() => {}}
+                  value={form.name}
+                  onChange={onChange}
                   name="username"
                   type="text"
                 />
@@ -56,14 +78,19 @@ export default function SignUpModal() {
 
               <FormControl id="email" isRequired>
                 <FormLabel>E-mail</FormLabel>
-                <Input value="" onChange={() => {}} name="email" type="email" />
+                <Input
+                  value={form.email}
+                  onChange={onChange}
+                  name="email"
+                  type="email"
+                />
               </FormControl>
 
               <FormControl id="nickname" isRequired>
                 <FormLabel>Nickname</FormLabel>
                 <Input
-                  value=""
-                  onChange={() => {}}
+                  value={form.nickname}
+                  onChange={onChange}
                   name="nickname"
                   type="text"
                 />
@@ -72,8 +99,8 @@ export default function SignUpModal() {
               <FormControl isRequired>
                 <FormLabel>Senha</FormLabel>
                 <Input
-                  value=""
-                  onChange={() => {}}
+                  value={form.password}
+                  onChange={onChange}
                   name="password"
                   type="password"
                 />
