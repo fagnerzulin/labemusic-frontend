@@ -10,6 +10,8 @@ import {
   Title,
 } from './loginPage.styled';
 import useForm from '../../hooks/useForm';
+import login from '../../services/login';
+import { saveToken } from '../../utils/localStorageFunctions';
 
 const initialValue = {
   email: '',
@@ -19,9 +21,21 @@ const initialValue = {
 export default function LoginPage() {
   const [form, onChange, clearForm] = useForm(initialValue);
 
+  const onClickLogin = async () => {
+    window.event.preventDefault();
+    const body = { ...form };
+    const result = await login(body);
+
+    if (result.status) {
+      saveToken(result.token);
+    }
+
+    clearForm(initialValue);
+  };
+
   return (
     <MainContainerLogin>
-      <Box>
+      <Box onSubmit={onClickLogin}>
         <Title>Login</Title>
         <FormControl id="email" isRequired>
           <FormLabel>E-mail</FormLabel>
