@@ -9,20 +9,38 @@ import {
   Text,
   Title,
 } from './loginPage.styled';
+import useForm from '../../hooks/useForm';
+
+const initialValue = {
+  email: '',
+  password: '',
+};
 
 export default function LoginPage() {
+  const [form, onChange, clearForm] = useForm(initialValue);
+
   return (
     <MainContainerLogin>
       <Box>
         <Title>Login</Title>
         <FormControl id="email" isRequired>
           <FormLabel>E-mail</FormLabel>
-          <Input value="" onChange={() => {}} name="email" type="email" />
+          <Input
+            value={form.email}
+            onChange={onChange}
+            name="email"
+            type="email"
+          />
         </FormControl>
 
         <FormControl isRequired>
           <FormLabel>Senha</FormLabel>
-          <Input value="" onChange={() => {}} name="password" type="password" />
+          <Input
+            value={form.password}
+            onChange={onChange}
+            name="password"
+            type="password"
+          />
         </FormControl>
 
         <Button
