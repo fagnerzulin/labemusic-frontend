@@ -42,3 +42,9 @@ export const Title = styled.h1`
   text-align: center;
   margin-bottom: 10px;
 `;
+
+export const Warning = styled.p`
+  font-size: 1.5em;
+  font-weight: 600;
+  text-align: center;
+`;
