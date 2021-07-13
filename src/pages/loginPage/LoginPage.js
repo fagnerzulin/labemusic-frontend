@@ -1,5 +1,6 @@
 import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import SignUpModal from '../../components/SignUpModal/SignUpModal';
 import palette from '../../constants/paletteColor';
 import {
@@ -12,6 +13,7 @@ import {
 import useForm from '../../hooks/useForm';
 import login from '../../services/login';
 import { saveToken } from '../../utils/localStorageFunctions';
+import { goToListMusicPage } from '../../routers/coordinate';
 
 const initialValue = {
   email: '',
@@ -20,6 +22,7 @@ const initialValue = {
 
 export default function LoginPage() {
   const [form, onChange, clearForm] = useForm(initialValue);
+  const history = useHistory();
 
   const onClickLogin = async () => {
     window.event.preventDefault();
@@ -28,6 +31,7 @@ export default function LoginPage() {
 
     if (result.status) {
       saveToken(result.token);
+      goToListMusicPage(history);
     }
 
     clearForm(initialValue);
