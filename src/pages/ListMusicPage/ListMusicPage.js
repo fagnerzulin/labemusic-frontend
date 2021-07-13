@@ -5,13 +5,15 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Button,
   Divider,
   SimpleGrid,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import MenuButton from '../../components/MenuButton/MenuButton';
+import MoreMusicDetails from '../../components/MoreMusicDetails/MoreMusicDetails';
 import palette from '../../constants/paletteColor';
+import useProtectedPage from '../../hooks/useProtectedPage';
 import getAllMusic from '../../services/getAllMusics';
 
 import {
@@ -19,10 +21,13 @@ import {
   MainContainerList,
   MenuContainer,
   Title,
+  Warning,
 } from './listMusicPage.styled';
 
 export default function ListMusicPage() {
   const [musics, setMusics] = useState([]);
+  const history = useHistory();
+  useProtectedPage(history);
 
   const handleClick = async () => {
     const result = await getAllMusic();
@@ -43,6 +48,9 @@ export default function ListMusicPage() {
         <MenuButton click={handleClick}>Listar Músicas</MenuButton>
       </MenuContainer>
       <ListContainer>
+        {musics.length === 0 && (
+          <Warning>Clique em Listar Músicas para começar 🎶💃🏽🕺🏽🎵</Warning>
+        )}
         <SimpleGrid
           style={{ margin: '20px auto' }}
           columns={[1, 1, 1, 2]}
@@ -67,10 +75,7 @@ export default function ListMusicPage() {
                     alignItems="center"
                     pb={4}
                   >
-                    Autor: {music.author}{' '}
-                    <Button colorScheme="blackAlpha" size="sm">
-                      Saiba mais
-                    </Button>
+                    Autor: {music.author} <MoreMusicDetails id={music.id} />
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>
