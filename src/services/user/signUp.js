@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userUrl } from './config/urlApi';
+import { userUrl } from '../config/urlApi';
 
 const signUp = async (body) => {
   try {
