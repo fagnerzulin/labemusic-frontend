@@ -7,6 +7,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
+        boxSizing: 'border-box',
         bg: palette.beige,
         fontFamily: 'Roboto',
       },

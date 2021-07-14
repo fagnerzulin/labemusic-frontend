@@ -14,6 +14,7 @@ import MenuButton from '../../components/MenuButton/MenuButton';
 import MoreMusicDetails from '../../components/MoreMusicDetails/MoreMusicDetails';
 import palette from '../../constants/paletteColor';
 import useProtectedPage from '../../hooks/useProtectedPage';
+import { goToCreateMusicPage } from '../../routers/coordinate';
 import getAllMusic from '../../services/getAllMusics';
 
 import {
@@ -44,7 +45,9 @@ export default function ListMusicPage() {
 
         <Divider mb="10" />
 
-        <MenuButton>Nova Música</MenuButton>
+        <MenuButton click={() => goToCreateMusicPage(history)}>
+          Nova Música
+        </MenuButton>
         <MenuButton click={handleClick}>Listar Músicas</MenuButton>
       </MenuContainer>
       <ListContainer>
