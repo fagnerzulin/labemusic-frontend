@@ -1,6 +1,6 @@
 import axios from 'axios';
-import headerApi from './config/headerApi';
-import { musicUrl } from './config/urlApi';
+import headerApi from '../config/headerApi';
+import { musicUrl } from '../config/urlApi';
 
 const getAllMusics = async () => {
   try {
