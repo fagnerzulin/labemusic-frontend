@@ -1,13 +1,21 @@
 import { Button } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { useHistory } from 'react-router-dom';
 import MainContainer from '../../components/StyledComponents/MainContainer.styled';
 import palette from '../../constants/paletteColor';
-import { goToLoginPage } from '../../routers/coordinate';
+import { goToListMusicPage, goToLoginPage } from '../../routers/coordinate';
+import { hasToken } from '../../utils/localStorageFunctions';
 import { Box, Subtitle, Title } from './homePage.styled';
 
 export default function HomePage() {
   const history = useHistory();
+
+  const [hasTokenValue, setHasTokenValue] = useState(false);
+
+  useEffect(() => {
+    setHasTokenValue(hasToken());
+  }, []);
   return (
     <MainContainer>
       <Box>
@@ -23,9 +31,11 @@ export default function HomePage() {
           }}
           color="white"
           size="lg"
-          onClick={() => goToLoginPage(history)}
+          onClick={() =>
+            hasTokenValue ? goToListMusicPage(history) : goToLoginPage(history)
+          }
         >
-          Login
+          {hasTokenValue ? 'Lista de músicas' : 'Login'}
         </Button>
       </Box>
     </MainContainer>
