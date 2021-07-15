@@ -4,7 +4,7 @@ import { genreUrl } from '../config/urlApi';
 
 const getAllGenre = async () => {
   try {
-    const response = await axios.get(`${genreUrl}`, headerApi());
+    const response = await axios.get(`${genreUrl}/all`, headerApi());
     const { genres } = response.data;
     return {
       status: true,
