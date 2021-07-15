@@ -17,7 +17,7 @@ import React from 'react';
 import palette from '../../constants/paletteColor';
 import { ContainerFormSingUp, SubTitle } from './signUpModal.styled';
 import useForm from '../../hooks/useForm';
-import signUp from '../../services/signUp';
+import signUp from '../../services/user/signUp';
 import { saveToken } from '../../utils/localStorageFunctions';
 
 const initialValues = {

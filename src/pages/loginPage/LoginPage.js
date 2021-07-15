@@ -11,7 +11,7 @@ import {
   Title,
 } from './loginPage.styled';
 import useForm from '../../hooks/useForm';
-import login from '../../services/login';
+import login from '../../services/user/login';
 import { saveToken } from '../../utils/localStorageFunctions';
 import { goToListMusicPage } from '../../routers/coordinate';
 

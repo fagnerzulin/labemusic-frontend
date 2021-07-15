@@ -15,7 +15,7 @@ import MoreMusicDetails from '../../components/MoreMusicDetails/MoreMusicDetails
 import palette from '../../constants/paletteColor';
 import useProtectedPage from '../../hooks/useProtectedPage';
 import { goToCreateMusicPage } from '../../routers/coordinate';
-import getAllMusic from '../../services/getAllMusics';
+import getAllMusic from '../../services/music/getAllMusics';
 
 import {
   ListContainer,
