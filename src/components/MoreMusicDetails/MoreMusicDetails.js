@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import palette from '../../constants/paletteColor';
-import getMusicBy from '../../services/getMusicBy';
+import getMusicBy from '../../services/music/getMusicBy';
 import formatDate from '../../utils/formatDate';
 import { Field, SubTitle, Text } from './moreMusicDetails.styled';
 
