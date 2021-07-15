@@ -36,21 +36,25 @@ import {
   ChoiseContainer,
   RegisterContainer,
 } from './createMusicPage.styled';
+import getAllGenre from '../../services/genre/getAllGenre';
 
 export default function CreateMusicPage() {
   const history = useHistory();
   useProtectedPage(history);
   const [albums, setAlbums] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     (async () => {
       const albumResult = await getAllAlbum();
+      const genresResult = await getAllGenre();
 
-      if (albumResult.status) {
+      if (albumResult.status && genresResult.status) {
         setAlbums(albumResult.albums);
+        setGenres(genresResult.genres);
       }
     })();
-  }, [albums]);
+  }, []);
 
   return (
     <MainContainerList>
@@ -114,21 +118,39 @@ export default function CreateMusicPage() {
               >
                 <Accordion allowMultiple>
                   <AccordionItem borderColor={palette.blue}>
-                    <h2>
-                      <AccordionButton>
-                        <Box flex="1" textAlign="left">
-                          Clique para expandir
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel bg="white">
-                      <HStack>
-                        <Checkbox value="naruto">Naruto</Checkbox>
-                        <Checkbox value="sasuke">Sasuke</Checkbox>
-                        <Checkbox value="kakashi">kakashi</Checkbox>
-                      </HStack>
-                    </AccordionPanel>
+                    {({ isExpanded }) => (
+                      <>
+                        {isExpanded ? (
+                          <h2>
+                            <AccordionButton>
+                              <Box flex="1" textAlign="left">
+                                Clique pra recolher
+                              </Box>
+                              <AccordionIcon />
+                            </AccordionButton>
+                          </h2>
+                        ) : (
+                          <h2>
+                            <AccordionButton>
+                              <Box flex="1" textAlign="left">
+                                Clique pra expandir
+                              </Box>
+                              <AccordionIcon />
+                            </AccordionButton>
+                          </h2>
+                        )}
+                        <AccordionPanel bg="white">
+                          <HStack>
+                            {genres.length > 0 &&
+                              genres.map((genre) => (
+                                <Checkbox key={genre.id} value={genre.id}>
+                                  {genre.genre}
+                                </Checkbox>
+                              ))}
+                          </HStack>
+                        </AccordionPanel>
+                      </>
+                    )}
                   </AccordionItem>
                 </Accordion>
               </CheckboxGroup>
