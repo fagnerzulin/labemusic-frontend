@@ -16,7 +16,7 @@ import {
   Box,
   Button,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import MenuButton from '../../components/MenuButton/MenuButton';
 import palette from '../../constants/paletteColor';
@@ -25,6 +25,7 @@ import {
   goToCreateMusicPage,
   goToListMusicPage,
 } from '../../routers/coordinate';
+import getAllAlbum from '../../services/album/getAllAlbum';
 import {
   FormContainer,
   MainContainerList,
@@ -39,6 +40,17 @@ import {
 export default function CreateMusicPage() {
   const history = useHistory();
   useProtectedPage(history);
+  const [albums, setAlbums] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const albumResult = await getAllAlbum();
+
+      if (albumResult.status) {
+        setAlbums(albumResult.albums);
+      }
+    })();
+  }, [albums]);
 
   return (
     <MainContainerList>
@@ -82,8 +94,12 @@ export default function CreateMusicPage() {
                 borderColor={palette.blue}
                 placeholder="Selecione o álbum"
               >
-                <option>Ceremonials</option>
-                <option>A Night at the Opera</option>
+                {albums.length > 0 &&
+                  albums.map((album) => (
+                    <option key={album.id} value={album.id}>
+                      {album.album}
+                    </option>
+                  ))}
               </Select>
             </FormControl>
 
