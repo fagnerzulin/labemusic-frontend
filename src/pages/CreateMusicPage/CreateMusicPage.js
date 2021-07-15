@@ -38,6 +38,7 @@ import {
 } from './createMusicPage.styled';
 import getAllGenre from '../../services/genre/getAllGenre';
 import NewAlbumModal from '../../components/NewAlbumModal/NewAlbumModal';
+import NewGenreModal from '../../components/NewGenreModal/NewGenreModal';
 
 export default function CreateMusicPage() {
   const history = useHistory();
@@ -49,9 +50,9 @@ export default function CreateMusicPage() {
     setAlbums([...albums, album]);
   };
 
-  // const addNewGenre = (genre) => {
-  //   setGenres([...genres, genre]);
-  // };
+  const addNewGenre = (genre) => {
+    setGenres([...genres, genre]);
+  };
 
   useEffect(() => {
     (async () => {
@@ -165,7 +166,7 @@ export default function CreateMusicPage() {
               </CheckboxGroup>
               <FormHelperText>Selecione ao menos um genêro</FormHelperText>
             </FormControl>
-            <Button>Registre um novo Genêro</Button>
+            <NewGenreModal addNewGenre={addNewGenre} />
           </ChoiseContainer>
         </InputContainer>
 
