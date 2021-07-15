@@ -37,12 +37,21 @@ import {
   RegisterContainer,
 } from './createMusicPage.styled';
 import getAllGenre from '../../services/genre/getAllGenre';
+import NewAlbumModal from '../../components/NewAlbumModal/NewAlbumModal';
 
 export default function CreateMusicPage() {
   const history = useHistory();
   useProtectedPage(history);
   const [albums, setAlbums] = useState([]);
   const [genres, setGenres] = useState([]);
+
+  const addNewAlbum = (album) => {
+    setAlbums([...albums, album]);
+  };
+
+  // const addNewGenre = (genre) => {
+  //   setGenres([...genres, genre]);
+  // };
 
   useEffect(() => {
     (async () => {
@@ -107,7 +116,7 @@ export default function CreateMusicPage() {
               </Select>
             </FormControl>
 
-            <Button>Registre um novo Álbum</Button>
+            <NewAlbumModal addNewAlbum={addNewAlbum} />
           </ChoiseContainer>
           <ChoiseContainer>
             <FormControl mb="5" mr="5" as="fieldset" isRequired>
