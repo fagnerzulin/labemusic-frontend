@@ -25,7 +25,7 @@ export default function NewAlbumModal({ addNewAlbum }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [form, onChange, clearForm] = useForm(initialValues);
 
-  const onClickSabe = async () => {
+  const onClickSave = async () => {
     window.event.preventDefault();
     const body = { ...form };
 
@@ -62,7 +62,7 @@ export default function NewAlbumModal({ addNewAlbum }) {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ContainerFormSingUp onSubmit={onClickSabe}>
+            <ContainerFormSingUp onSubmit={onClickSave}>
               <FormControl id="name" isRequired>
                 <FormLabel>Nome do Álbum</FormLabel>
                 <Input
