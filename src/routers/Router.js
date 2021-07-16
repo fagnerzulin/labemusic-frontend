@@ -10,10 +10,18 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/list-music" component={ListMusicPage} />
-        <Route exact path="/create-music" component={CreateMusicPage} />
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
+        <Route exact path="/list-music">
+          <ListMusicPage />
+        </Route>
+        <Route exact path="/create-music">
+          <CreateMusicPage />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
