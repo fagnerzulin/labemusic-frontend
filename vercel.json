@@ -1,8 +1,0 @@
-{
-  "routes": [
-    { "src": "/", "dest": "/" },
-    { "src": "/login", "dest": "/" },
-    { "src": "/list-music", "dest": "/" },
-    { "src": "/create-music", "dest": "/" }
-  ]
-}
