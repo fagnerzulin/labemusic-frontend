@@ -52,7 +52,9 @@ export default function ListMusicPage() {
       </MenuContainer>
       <ListContainer>
         {musics.length === 0 && (
-          <Warning>Clique em Listar Músicas para começar 🎶💃🏽🕺🏽🎵</Warning>
+          <Warning>
+            Clique em Listar Músicas ou em Nova Música para começar 🎶💃🏽🕺🏽🎵
+          </Warning>
         )}
         <SimpleGrid
           style={{ margin: '20px auto' }}
