@@ -71,7 +71,7 @@ export default function SignUpModal() {
                 <Input
                   value={form.name}
                   onChange={onChange}
-                  name="username"
+                  name="name"
                   type="text"
                 />
               </FormControl>
