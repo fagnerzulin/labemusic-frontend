@@ -14,11 +14,13 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import palette from '../../constants/paletteColor';
 import { ContainerFormSingUp, SubTitle } from './signUpModal.styled';
 import useForm from '../../hooks/useForm';
 import signUp from '../../services/user/signUp';
 import { saveToken } from '../../utils/localStorageFunctions';
+import { goToListMusicPage } from '../../routers/coordinate';
 
 const initialValues = {
   email: '',
@@ -30,6 +32,7 @@ const initialValues = {
 export default function SignUpModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [form, onChange] = useForm(initialValues);
+  const history = useHistory();
 
   const onClickSignUp = async () => {
     window.event.preventDefault();
@@ -38,6 +41,7 @@ export default function SignUpModal() {
     const result = await signUp(body);
     if (result.status) {
       saveToken(result.token);
+      goToListMusicPage(history);
     }
   };
 
